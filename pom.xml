@@ -12,6 +12,13 @@
     <name>ms-order-service</name>
     <description>ms-order-service</description>
 
+    <repositories>
+        <repository>
+            <id>brewery-starter</id>
+            <url>https://maven.pkg.github.com/MrSkinface/ms-brewery-starter</url>
+        </repository>
+    </repositories>
+
     <dependencies>
 
     </dependencies>
