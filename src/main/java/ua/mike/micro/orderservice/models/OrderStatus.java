@@ -1,0 +1,8 @@
+package ua.mike.micro.orderservice.models;
+
+public enum OrderStatus {
+
+    NEW, VALIDATION_PENDING, VALIDATED, VALIDATION_ERROR,
+    ALLOCATION_PENDING, ALLOCATED, ALLOCATION_ERROR,
+    INVENTORY_PENDING, PICKED_UP, CANCELED
+}
