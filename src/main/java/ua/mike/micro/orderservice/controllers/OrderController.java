@@ -5,9 +5,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ua.mike.micro.orderservice.dto.OrderDto;
+import ua.mike.micro.orderservice.models.OrderStatus;
 import ua.mike.micro.orderservice.services.OrderService;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -26,6 +29,13 @@ public class OrderController {
     @GetMapping("/{id}")
     public OrderDto getOrder(@PathVariable UUID id) {
         return service.getOrder(id);
+    }
+
+    @GetMapping
+    public List<OrderDto> getOrders(@RequestParam(required = false) OrderStatus status) {
+        if (status != null)
+            return service.list(status);
+        return service.list();
     }
 
     @PutMapping("/{id}/pickup")

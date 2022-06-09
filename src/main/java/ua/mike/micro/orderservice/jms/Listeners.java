@@ -74,7 +74,7 @@ public class Listeners {
     public void listenAddedBeerNotifications(String data) {
         actions.consume(data, AddedBeerNotification.class, notification -> {
             log.debug("Got add beer inventory notification");
-            repo.findByStatus(OrderStatus.INVENTORY_PENDING).stream()
+            repo.findByStatusIn(OrderStatus.INVENTORY_PENDING).stream()
                     .filter(order -> order.getPositions().stream().anyMatch(position -> position.getBeerId().equals(notification.getBeerId())))
                     .forEach(order -> {
                         sm.sendEvent(order.getId(), OrderEvent.ALLOCATE);

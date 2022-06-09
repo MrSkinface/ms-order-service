@@ -40,6 +40,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<OrderDto> list(OrderStatus ... status) {
+        return repo.findByStatusIn(status).stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public OrderDto getOrder(UUID id) {
         return repo.findById(id)
                 .map(mapper::toDto)

@@ -9,5 +9,5 @@ import java.util.UUID;
 
 public interface OrderRepo extends JpaRepository<Order, UUID> {
 
-    List<Order> findByStatus(OrderStatus status);
+    List<Order> findByStatusIn(OrderStatus ... status);
 }
