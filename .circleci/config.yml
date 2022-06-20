@@ -1,18 +1,21 @@
 version: 2.1
 jobs:
-  build-and-test:
+  build-and-deploy:
     docker:
       - image: cimg/openjdk:17.0
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 20.10.14
+          docker_layer_caching: true
       - run:
           name: Create maven settings
           command: echo $MVN_SETTINGS > .circleci/.settings.xml
       - run:
-          name: Build and test
-          command: mvn -s .circleci/.settings.xml clean test
+          name: Build and deploy
+          command: mvn -s .circleci/.settings.xml clean package docker:build docker:push
 
 workflows:
-  build-and-test:
+  test:
     jobs:
-      - build-and-test
+      - build-and-deploy
