@@ -16,6 +16,6 @@ jobs:
           command: mvn -s .circleci/.settings.xml clean package docker:build docker:push
 
 workflows:
-  test:
+  build-deploy:
     jobs:
       - build-and-deploy
